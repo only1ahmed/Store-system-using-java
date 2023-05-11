@@ -9,19 +9,19 @@ public class login {
     private final String password;
     private String id;
     private String role;
-    private JdbcSQLServerConnection databaseConnection = new JdbcSQLServerConnection("toffee");
+    private JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("toffee");
     boolean verified = false;
 
     public login(String username, String password) {
         this.username = username;
         this.password = password;
         try {
-            String query = "SELECT username FROM users WHERE username = '";
-            query += username;
-            query += "' and password = '";
-            query += password;
-            query += "'";
-            ResultSet answer = databaseConnection.queryToDatabase(query, true);
+            String query = "SELECT username FROM users WHERE username = ? and password = ?";
+            Connection databaseConnection = JdbcConnection.getConnection();
+            PreparedStatement statement = databaseConnection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet answer = statement.executeQuery();
             if (answer.next()) {
                 verified = true;
             }

@@ -22,22 +22,11 @@ public class JdbcSQLServerConnection {
 
         }
     }
+
     // another method to connect:
     // Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=users;integratedSecurity=false;encrypt=false;trustServerCertificate=false;user=mido;password=12345678");
-
-
-    public ResultSet queryToDatabase(String query, boolean expectedResultSet) {
-        ResultSet answer = null;
-        try {
-            Statement q = connection.createStatement();
-            if (expectedResultSet) {
-                answer = q.executeQuery(query);
-            } else {
-                q.execute(query);
-            }
-        } catch (Exception e) {
-            System.out.println("Exception");
-        }
-        return answer;
+    Connection getConnection() {
+        return connection;
     }
+
 }
