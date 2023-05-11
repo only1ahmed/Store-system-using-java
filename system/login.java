@@ -19,7 +19,7 @@ public class login {
 
     protected boolean verifyLogin(String columnName, String columnValue, String password) {
         try {
-            String query = "SELECT username FROM users WHERE" + columnName + "= ? and password = ?";
+            String query = "SELECT username FROM users WHERE " + columnName + "= ? and password = ?";
             PreparedStatement statement = databaseConnection.prepareStatement(query);
             statement.setString(1, columnValue);
             statement.setString(2, password);

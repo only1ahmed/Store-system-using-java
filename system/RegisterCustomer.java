@@ -27,7 +27,7 @@ public class RegisterCustomer extends Register {
     }
 
     public int Register(String username, String password, String email, String FirstName, String LastName) {
-        if (verifyIfExists(username)) {
+        if (verifyIfExists(username, email)) {
             //code for that username exists
             return -1;
         } else {
