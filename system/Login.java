@@ -1,14 +1,12 @@
 package system;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-public abstract class login {
+public abstract class Login {
     protected JdbcSQLServerConnection JdbcConnection;
     protected Connection databaseConnection;
 
-    public login() {
+    public Login() {
         JdbcConnection = new JdbcSQLServerConnection("toffee");
         databaseConnection = JdbcConnection.getConnection();
     }

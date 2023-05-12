@@ -2,13 +2,13 @@ package system;
 
 import java.util.Scanner;
 
-public class run {
+public class Run {
     static boolean logged_in = false;
     static Scanner input = new Scanner(System.in);
     static LoginCustomer loginUtility = new LoginCustomer();
     static RegisterCustomer registerUtility = new RegisterCustomer();
     private static String loggedInID;
-    private static user userData = new user();
+    private static final Customer userData = new Customer();
 
     public static void main(String[] args) {
         System.out.println("Welcome to Toffee store.\n");
@@ -29,7 +29,10 @@ public class run {
             }
         }
         System.out.println("Login done successfully\n");
+
+
         userData.setUserData(loggedInID);
+
 
     }
 

@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class user {
+public class User {
     private String username;
     private String FirstName;
     private String LastName;

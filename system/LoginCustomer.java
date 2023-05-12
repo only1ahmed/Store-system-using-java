@@ -3,7 +3,7 @@ package system;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class LoginCustomer extends login {
+public class LoginCustomer extends Login {
     protected boolean verifyLogin(String columnName, String columnValue, String password) {
         try {
             String query = "SELECT username FROM users WHERE " + columnName + "= ? and password = ? and role = 'user'";
