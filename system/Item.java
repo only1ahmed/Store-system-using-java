@@ -8,7 +8,7 @@ public class Item {
     public String name, description, brand;
     Units unitType;
     public static int itemID;
-    public int quantity, maxQuantity;
+    public int quantityAvailable, maxQuantity;
     ItemStatus status;
     double price;
     double discount;
@@ -30,7 +30,7 @@ public class Item {
             description = answer.getString(2);
             brand = answer.getString(3);
             itemID = answer.getInt(4);
-            quantity = answer.getInt(5);
+            quantityAvailable = answer.getInt(5);
             {
                 String unit = answer.getString(6);
                 if (unit == "kg") {
