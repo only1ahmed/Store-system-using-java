@@ -10,8 +10,8 @@ public abstract class Register {
 
 
     protected void buildDatabaseConnection() {
-        databaseConnection = JdbcConnection.getConnection();
         JdbcConnection = new JdbcSQLServerConnection("toffee");
+        databaseConnection = JdbcConnection.getConnection();
     }
 
 
@@ -19,22 +19,24 @@ public abstract class Register {
         buildDatabaseConnection();
     }
 
-    public boolean verifyIfExists(String username) {
-        boolean exists = false;
+    protected boolean verifyIfExists(String username, String email) {
+        return ID_exists("username", username) || ID_exists("email", email);
+    }
+
+    protected boolean ID_exists(String columnName, String columnValue) {
         try {
-            String query = "SELECT username FROM users WHERE username = ? and password = ?";
+            String query = "SELECT username FROM users WHERE " + columnName + "= ?";
             PreparedStatement statement = databaseConnection.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setString(1, columnValue);
             ResultSet answer = statement.executeQuery();
             if (answer.next()) {
-                exists = true;
+                return true;
             }
         } catch (Exception e) {
             System.err.println("searching for user in database exception");
         }
-        return exists;
+        return false;
     }
-
 
     private boolean verifyPasswordStrength(String password) {
         //todo
