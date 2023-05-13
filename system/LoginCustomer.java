@@ -11,7 +11,7 @@ public class LoginCustomer extends Login {
             statement.setString(1, columnValue);
             statement.setString(2, password);
             ResultSet answer = statement.executeQuery();
-            if (answer.next()) {
+            if (answer.isBeforeFirst()) {
                 return true;
             }
         } catch (Exception e) {

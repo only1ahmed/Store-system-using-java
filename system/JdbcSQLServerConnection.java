@@ -18,8 +18,7 @@ public class JdbcSQLServerConnection {
             url += ";encrypt=false";
             connection = DriverManager.getConnection(url, databaseUsername, databasePassword);
         } catch (Exception e) {
-            System.out.println("database connection exception");
-
+            System.err.println("database connection exception");
         }
     }
 

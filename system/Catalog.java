@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.util.Vector;
 
 public class Catalog {
-    private Vector<Item> allItems;
+    private Vector<Item> allItems = new Vector<Item>();
+    public int itemsCount = 0;
 
     public Catalog() {
         getItems();
@@ -24,7 +25,7 @@ public class Catalog {
     }
 
     public ResultSet getIDs() {
-        JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("items");
+        JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("toffee");
         Connection databaseConnection = JdbcConnection.getConnection();
         String query = "SELECT id from items";
         try {
@@ -36,22 +37,19 @@ public class Catalog {
         return null;
     }
 
-    private void printItemData(int indexOfItem) {
-        Item item = allItems.get(indexOfItem);
-        System.out.println("\nName: " + item.name);
-        System.out.println("\nDescription: " + item.description);
-        System.out.println("\nUnit type: " + item.unitType.name());
-        System.out.println("\nQuantity available: " + Integer.toString(item.quantityAvailable));
-        System.out.println("\nMax quantity per order: " + Integer.toString(item.maxQuantity));
-        System.out.println("\nStatus: " + item.status.name());
-        System.out.println("\nPrice before discount: " + Double.toString(item.price));
-        System.out.println("\nPrice after discount: " + Double.toString(item.price - (item.price * (item.discount / 100))));
-    }
 
     public void displayItems() {
-        int counter = 1;
+        int counter = 0;
         for (Item item : allItems) {
-            System.out.println(Integer.toString(counter) + ") " + item.name + '\n');
+            counter++;
+            System.out.println("\n\n" + counter + ")");
+            item.printItemData();
         }
+        itemsCount = counter;
+    }
+
+    public Item getItem(int itemIndex) {
+        //// Expected a 1 based index !
+        return allItems.get(itemIndex - 1);
     }
 }

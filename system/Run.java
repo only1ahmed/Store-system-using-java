@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Run {
     static boolean logged_in = false;
-    static Scanner input = new Scanner(System.in);
+    public static Scanner input = new Scanner(System.in);
     static LoginCustomer loginUtility = new LoginCustomer();
     static RegisterCustomer registerUtility = new RegisterCustomer();
     private static String loggedInID;
@@ -14,25 +14,34 @@ public class Run {
         System.out.println("Welcome to Toffee store.\n");
         int choice;
         while (!logged_in) {
-            System.out.println("What do you want to do?\n1) Login\n2) Register\n3) Exit");
-            choice = input.nextInt();
-            if (choice == 1) {
-                logged_in = menuLogin();
-                if (!logged_in) {
-                    System.out.println("Username or password are incorrect.\n");
+            try {
+
+                System.out.println("What do you want to do?\n1) Login\n2) Register\n3) Exit");
+                choice = input.nextInt();
+                if (choice == 1) {
+                    logged_in = menuLogin();
+                    if (!logged_in) {
+                        System.out.println("Username or password are incorrect.\n");
+                    }
+                } else if (choice == 2) {
+                    menuRegister();
+                } else if (choice == 3) {
+                    System.out.println("\nThank you for using Toffee store!");
+                    System.exit(0);
+                } else {
+                    System.out.println("\nPlease enter a valid option..");
                 }
-            } else if (choice == 2) {
-                menuRegister();
-            } else if (choice == 3) {
-                System.out.println("\nThank you for using Toffee store!");
-                System.exit(1);
+            } catch (Exception e) {
+                System.out.println("\nPlease enter a valid option..");
             }
         }
+
         System.out.println("Login done successfully\n");
 
 
         userData.setUserData(loggedInID);
-
+        Store store = new Store(userData);
+        store.run();
 
     }
 

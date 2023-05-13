@@ -3,11 +3,12 @@ package system;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Objects;
 
 public class Item {
     public String name, description, brand;
     Units unitType;
-    public static int itemID;
+    public int itemID;
     public int quantityAvailable, maxQuantity;
     ItemStatus status;
     double price;
@@ -26,6 +27,7 @@ public class Item {
         }
 
         try {
+            answer.next();
             name = answer.getString(1);
             description = answer.getString(2);
             brand = answer.getString(3);
@@ -44,11 +46,11 @@ public class Item {
             discount = answer.getDouble(9);
             {
                 String s = answer.getString(10);
-                if (s == "available") {
+                if (Objects.equals(s, "available")) {
                     status = ItemStatus.available;
-                } else if (s == "unavailable") {
+                } else if (Objects.equals(s, "unavailable")) {
                     status = ItemStatus.unavailable;
-                } else if (s == "out_of_stock") {
+                } else if (Objects.equals(s, "Out of stock")) {
                     status = ItemStatus.out_of_stock;
                 }
             }
@@ -59,7 +61,7 @@ public class Item {
     }
 
     public ResultSet getSet() {
-        JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("items");
+        JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("toffee");
         Connection databaseConnection = JdbcConnection.getConnection();
         String query = "SELECT * FROM items WHERE id = ?";
         try {
@@ -72,4 +74,14 @@ public class Item {
         return null;
     }
 
+    public void printItemData() {
+        System.out.println("\nName: " + this.name);
+        System.out.println("\nDescription: " + this.description);
+        System.out.println("\nUnit type: " + this.unitType.name());
+        System.out.println("\nQuantity available: " + Integer.toString(this.quantityAvailable));
+        System.out.println("\nMax quantity per order: " + Integer.toString(this.maxQuantity));
+        System.out.println("\nStatus: " + this.status.name());
+        System.out.println("\nPrice before discount: " + Double.toString(this.price));
+        System.out.println("\nPrice after discount: " + Double.toString(this.price - (this.price * (this.discount / 100))));
+    }
 }

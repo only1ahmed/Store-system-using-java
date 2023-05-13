@@ -36,11 +36,11 @@ public class User {
     public void setUserData(String id) {
         try {
             String query = "SELECT * FROM users WHERE username = ? ";
-            JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("users");
+            JdbcSQLServerConnection JdbcConnection = new JdbcSQLServerConnection("toffee");
             Connection databaseConnection = JdbcConnection.getConnection();
 
             ResultSet answer = getUserRow("username", id, databaseConnection);
-            if (!answer.isBeforeFirst()) {
+            if (!answer.next()) {
                 answer = getUserRow("email", id, databaseConnection);
             }
 
@@ -57,7 +57,7 @@ public class User {
 
     ResultSet getUserRow(String columnName, String columnValue, Connection databaseConnection) {
         try {
-            String query = "SELECT username FROM users WHERE " + columnName + "= ?";
+            String query = "SELECT * FROM users WHERE " + columnName + " = ?";
             PreparedStatement statement = databaseConnection.prepareStatement(query);
             statement.setString(1, columnValue);
             return statement.executeQuery();
@@ -66,4 +66,5 @@ public class User {
             return null;
         }
     }
+
 }
