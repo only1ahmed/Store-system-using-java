@@ -83,6 +83,8 @@ public class Run {
             System.out.println("Username or email already exists.\n");
         } else if (code == -2) {
             System.out.println("Unexpected error happened, please try again later.\n");
+        } else if (code == -3) {
+            System.out.println("/nPlease enter a valid mail..");
         }
     }
 }

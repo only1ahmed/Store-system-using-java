@@ -11,12 +11,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendMail {
+public class OTP {
     private String email;
     private int code;
 
     //constructor
-    SendMail(String email, int code) {
+    OTP(String email, int code) {
         this.email = email;
         this.code = code;
     }

@@ -1,6 +1,7 @@
 package App;
 
 import java.sql.PreparedStatement;
+import java.util.Random;
 
 public class RegisterCustomer extends Register {
 
@@ -30,7 +31,12 @@ public class RegisterCustomer extends Register {
             return -1;
         } else {
             if (verifyPasswordStrength(password)) {
-                return insertUser(username, password, email, FirstName, LastName);
+                if (mailVerification(email)) {
+                    return insertUser(username, password, email, FirstName, LastName);
+                } else {
+                    //code for bad email
+                    return -3;
+                }
             } else {
                 //code for weak passwords
                 return 0;
@@ -43,5 +49,15 @@ public class RegisterCustomer extends Register {
         //todo
         //search for a standard password strength rule and apply it
         return true;
+    }
+
+    private boolean mailVerification(String email) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(1000000);
+        OTP mail = new OTP(email, randomNumber);
+        mail.send();
+        System.out.println("\nPlease enter the code sent to your email: ");
+        int code = input.nextInt();
+        return code == randomNumber;
     }
 }

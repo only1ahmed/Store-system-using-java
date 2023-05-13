@@ -3,10 +3,12 @@ package App;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Scanner;
 
 public abstract class Register {
     protected JdbcSQLServerConnection JdbcConnection;
     protected Connection databaseConnection;
+    public static Scanner input = new Scanner(System.in);
 
 
     protected void buildDatabaseConnection() {
