@@ -74,7 +74,7 @@ public class Run {
         registerFirstname = input.nextLine();
         System.out.println("\nLast name: ");
         registerLastname = input.nextLine();
-        int code = registerUtility.Register(registerUsername, registerPassword, registerEmail, registerFirstname, registerLastname);
+        int code = registerUtility.register(registerUsername, registerPassword, registerEmail, registerFirstname, registerLastname);
         if (code == 1) {
             System.out.println("Registration done successfully\n");
         } else if (code == 0) {
