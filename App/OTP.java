@@ -27,7 +27,7 @@ public class OTP {
         String to = email;
 
         // Sender's email ID needs to be mentioned
-        String from = "awessam127@gmail.com";
+        String from = "Toffee.Store.Mail.Ahmed@gmail.com";
 
         // Assuming you are sending email from through gmails smtp
         String host = "smtp.gmail.com";
@@ -46,7 +46,7 @@ public class OTP {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("awessam127@gmail.com", "wrikmcmljoysfhbt");
+                return new PasswordAuthentication("Toffee.Store.Mail.Ahmed@gmail.com", "gdvblwgwphthbxbq");
 
             }
 
